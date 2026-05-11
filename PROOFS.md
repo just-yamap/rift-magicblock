@@ -5,7 +5,7 @@
 | Component | Status | Evidence |
 |---|---|---|
 | SDK installed | ✅ | `@magicblock-labs/ephemeral-rollups-sdk@0.10.5` in `backend/node_modules` |
-| Module deployed | ✅ | `backend/integrations/magicblock.js` — 292 LOC, 8 exports |
+| Module deployed | ✅ | `backend/integrations/magicblock.js` - 292 LOC, 8 exports |
 | Boot integration | ✅ | atm-connector.js line 627: `erProgram` build behind `USE_MAGICBLOCK` gate |
 | BUY-flow integration | ✅ | atm-connector.js line 1024: `openSessionViaProgram` after `lock_buy_claim` |
 | Commit integration | ✅ | atm-connector.js line 1273: `commitAndCloseViaProgram` after `confirm_dispensed` |
@@ -13,7 +13,7 @@
 | Health endpoint flag | ✅ | atm-connector.js line 2982: `flags.magicblock` exposed via `/health` |
 | Feature gate | ✅ | `USE_MAGICBLOCK=1` in `.env` toggles activation |
 | ER endpoint | ✅ | `https://eu.magicblock.app` (EU region, configurable via env) |
-| Fail-safe fallback | ✅ | try/catch around every ER call — BUY continues on mainnet if ER unavailable |
+| Fail-safe fallback | ✅ | try/catch around every ER call - BUY continues on mainnet if ER unavailable |
 
 ## On-chain footprint
 
@@ -43,13 +43,13 @@ The integration runs inside a working fiat-to-crypto ATM stack deployed on Solan
 
 | Service | Port | Role |
 |---|---|---|
-| `atm-connector.js` (Node) | 8790 | Core BUY/SELL orchestrator — hosts the MagicBlock integration |
+| `atm-connector.js` (Node) | 8790 | Core BUY/SELL orchestrator - hosts the MagicBlock integration |
 | `server.py` (Flask) | 5000 | Admin console + customer-facing kiosk API |
 | `printer-bridge.js` (Node/WS) | 8766 | ESC/POS thermal receipt printer |
 | `nv200-ws.py` (Python/WS) | 8765 | ITL NV200 banknote validator |
-| `essp.py` (Python) | — | ESSP serial protocol for the cash recycler |
+| `essp.py` (Python) | - | ESSP serial protocol for the cash recycler |
 
-The ATM physically accepts EUR cash via the NV200 validator, prices the crypto via Coinbase + Birdeye, and dispenses tokens via Jupiter/LI.FI/Umbra routes — all of which can be wrapped in a MagicBlock ER session when `USE_MAGICBLOCK=1`.
+The ATM physically accepts EUR cash via the NV200 validator, prices the crypto via Coinbase + Birdeye, and dispenses tokens via Jupiter/LI.FI/Umbra routes - all of which can be wrapped in a MagicBlock ER session when `USE_MAGICBLOCK=1`.
 
 ## Smoke verification
 
@@ -80,7 +80,7 @@ The final `commit_and_undelegate` signature is searchable on Solscan / Solana Ex
 
 ## Companion script: enable_privacy_mode.js
 
-`scripts/enable_privacy_mode.js` is a one-shot operator tool that enables the `privacy_mode` flag on the on-chain operator account (via `set_privacy_config`). It is idempotent — it reads current state first and skips the TX if already set with the expected viewing key.
+`scripts/enable_privacy_mode.js` is a one-shot operator tool that enables the `privacy_mode` flag on the on-chain operator account (via `set_privacy_config`). It is idempotent - it reads current state first and skips the TX if already set with the expected viewing key.
 
 ```bash
 cd backend
@@ -102,4 +102,4 @@ Publishing those would expose security-sensitive infrastructure that is not rele
 
 ## License
 
-MIT — Yann Mapouka <yamap@riftatm.com>
+MIT License

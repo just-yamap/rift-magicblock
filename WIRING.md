@@ -34,7 +34,7 @@ if (CFG.useMagicBlock) {
 
 ## 2. Open ER session AFTER lock_buy_claim (atm-connector.js ~line 1024)
 
-The session is opened **after** `lock_buy_claim` creates the Claim PDA on mainnet — the Claim must exist before it can be delegated.
+The session is opened **after** `lock_buy_claim` creates the Claim PDA on mainnet - the Claim must exist before it can be delegated.
 
 ```js
 // ── 3b. MagicBlock ER: delegate Operator + Claim PDAs ──
@@ -64,7 +64,7 @@ if (CFG.useMagicBlock && erProgram) {
 
 While the ER session is live, all program calls touching the Operator or Claim PDAs are routed to the MagicBlock ER validator instead of mainnet. The swap branch (Jupiter / LI.FI / Umbra) executes its on-chain state updates against the ER, dropping latency from 400-800ms per tx to <50ms.
 
-No code change is needed in the swap itself — Anchor's `Program` object is already pointed at the ER endpoint via `erProvider`.
+No code change is needed in the swap itself - Anchor's `Program` object is already pointed at the ER endpoint via `erProvider`.
 
 ---
 
@@ -89,7 +89,7 @@ if (erSession) {
 }
 ```
 
-- The commit returns a mainnet TX signature — this is the **proof of ER usage** that appears on Solscan
+- The commit returns a mainnet TX signature - this is the **proof of ER usage** that appears on Solscan
 - Even if the commit step fails, the ATM has already dispensed the crypto to the customer (settle happened on ER)
 
 ---
@@ -119,7 +119,7 @@ The Anchor program at `programs/rift-atm/src/lib.rs` exposes two instructions sp
 | `delegate_session` | CPIs into the MagicBlock delegation program with operator + claim PDA seeds, handing both accounts to the ER validator |
 | `commit_and_undelegate_session` | Called on the ER side; schedules a commit back to base layer and releases account ownership |
 
-Using these Anchor-level instructions (rather than calling the delegation program directly) is required because the PDAs cannot sign for themselves — the program needs to be the signer.
+Using these Anchor-level instructions (rather than calling the delegation program directly) is required because the PDAs cannot sign for themselves - the program needs to be the signer.
 
 ---
 
@@ -151,4 +151,4 @@ The next BUY transaction will go through the ER. Look for these lines in the log
 ... swap executes on ER ...
 [BUY] MagicBlock ER commit_and_undelegate: <mainnet-tx-signature>
 
-The commit signature is the on-chain proof of ER usage — searchable on Solscan.
+The commit signature is the on-chain proof of ER usage - searchable on Solscan.

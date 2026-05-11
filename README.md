@@ -1,8 +1,8 @@
-# RIFT ATM × MagicBlock Ephemeral Rollups
+# RIFT ATM x MagicBlock Ephemeral Rollups
 
 Sub-50ms on-chain BUY flow via MagicBlock ER delegation, integrated into the live RIFT ATM (mainnet, Solana).
 
-**Frontier 2026 — Privacy Track** (MagicBlock co-sponsored with SNS and STMY).
+**Frontier 2026 - Privacy Track** (MagicBlock co-sponsored with SNS and STMY).
 
 ---
 
@@ -61,9 +61,9 @@ rift-magicblock/
 | Function | Purpose |
 |---|---|
 | `openSession` | Delegate keypair-owned accounts to ER (non-PDA path) |
-| `openSessionViaProgram` | Delegate via Anchor program CPI (PDA-safe path) — **used by RIFT** |
+| `openSessionViaProgram` | Delegate via Anchor program CPI (PDA-safe path) - **used by RIFT** |
 | `commitAndClose` | Commit final ER state back to mainnet (non-PDA) |
-| `commitAndCloseViaProgram` | Commit via Anchor program CPI — **used by RIFT** |
+| `commitAndCloseViaProgram` | Commit via Anchor program CPI - **used by RIFT** |
 | `delegateIx` | Standalone delegation instruction builder |
 | `commitAndUndelegateIx` | Standalone commit instruction builder |
 | `erConnection` | Construct Connection object to ER endpoint |
@@ -76,7 +76,7 @@ If the MagicBlock SDK is unavailable, the ER endpoint is down, or any delegation
 - `magicblock.js` catches the error and returns null/throws to the caller
 - `atm-connector.js` wraps every MagicBlock call in `try/catch`
 - The BUY automatically falls back to mainnet-only execution
-- The customer receives crypto either way — MagicBlock is a performance layer, not a critical path
+- The customer receives crypto either way - MagicBlock is a performance layer, not a critical path
 
 See WIRING.md for the exact fail-safe code paths in the BUY flow.
 
@@ -104,4 +104,4 @@ With `USE_MAGICBLOCK=0` (default), the integration is fully inert: no ER program
 
 ## License
 
-MIT 
+MIT License
