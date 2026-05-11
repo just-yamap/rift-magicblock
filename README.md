@@ -17,13 +17,13 @@ MagicBlock Ephemeral Rollups let us delegate the operator + claim PDAs to a Magi
 │  Customer BUYS  │
 │  €X cash at ATM │
 └────────┬────────┘
-│
-▼
+         │
+         ▼
 ┌─────────────────────────────┐
 │ 1. lock_buy_claim (mainnet) │  ← Claim PDA created
 └────────┬────────────────────┘
-│
-▼
+         │
+         ▼
 ┌─────────────────────────────────────┐
 │ 2. openSessionViaProgram (Anchor)   │  ← Delegate Operator + Claim PDAs
 │    → delegate_session CPI           │     to MagicBlock ER validator
