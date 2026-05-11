@@ -104,4 +104,4 @@ With `USE_MAGICBLOCK=0` (default), the integration is fully inert: no ER program
 
 ## License
 
-MIT — Yann Mapouka <yamap@riftatm.com>
+MIT 
