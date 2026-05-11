@@ -13,40 +13,34 @@ RIFT is a fiat-to-crypto ATM running on Solana mainnet. Each customer BUY trigge
 MagicBlock Ephemeral Rollups let us delegate the operator + claim PDAs to a MagicBlock ER validator for the duration of the swap, dropping per-tx latency to <50ms. The final state is committed back to mainnet at the end of the BUY.
 
 ## Architecture
-┌─────────────────┐
-│  Customer BUYS  │
-│  €X cash at ATM │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────────────────┐
-│ 1. lock_buy_claim (mainnet) │  ← Claim PDA created
-└────────┬────────────────────┘
-         │
-         ▼
-┌─────────────────────────────────────┐
-│ 2. openSessionViaProgram (Anchor)   │  ← Delegate Operator + Claim PDAs
-│    → delegate_session CPI           │     to MagicBlock ER validator
-└────────┬────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────┐
-│ 3. Swap on ER (sub-50ms)            │  ← Mutations happen on ER,
-│    Jupiter / LI.FI / Umbra          │     not mainnet
-└────────┬────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────┐
-│ 4. confirm_dispensed (ER)           │  ← Settles claim on ER
-└────────┬────────────────────────────┘
-│
-▼
-┌─────────────────────────────────────┐
-│ 5. commitAndCloseViaProgram         │  ← commit_and_undelegate_session
-│    → commit final state to mainnet  │
-└─────────────────────────────────────┘
+
+```
+Customer BUYS at ATM kiosk (cash inserted)
+|
+v
+lock_buy_claim (mainnet)
+-> Claim PDA created on-chain
+|
+v
+openSessionViaProgram (Anchor CPI delegate_session)
+-> Operator + Claim PDAs delegated to MagicBlock ER validator
+|
+v
+Swap on ER (sub-50ms latency)
+-> Jupiter / LI.FI / Umbra route runs on ER, not mainnet
+|
+v
+confirm_dispensed (ER)
+-> Claim settled on ER
+|
+v
+commitAndCloseViaProgram
+-> commit_and_undelegate_session: final state committed to mainnet
+```
+
 
 ## Repository layout
+```
 rift-magicblock/
 ├── integration/
 │   └── magicblock.js              ← Production module (8 exports)
@@ -55,6 +49,7 @@ rift-magicblock/
 ├── README.md                       ← This file
 ├── WIRING.md                       ← How it wires into atm-connector BUY flow
 └── PROOFS.md                       ← Production deployment evidence
+```
 
 ## Module exports (`integration/magicblock.js`)
 
